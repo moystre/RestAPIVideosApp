@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoAppBLL", "VideoAppBLL\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoAppDAL", "VideoAppDAL\VideoAppDAL.csproj", "{25BC24F2-2DAF-4DBA-98A0-7F14F41BFD13}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoRestAPI", "VideoRestAPI\VideoRestAPI.csproj", "{42A72844-6DAC-4BEE-9B56-D8C47AB6DE53}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{25BC24F2-2DAF-4DBA-98A0-7F14F41BFD13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25BC24F2-2DAF-4DBA-98A0-7F14F41BFD13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25BC24F2-2DAF-4DBA-98A0-7F14F41BFD13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42A72844-6DAC-4BEE-9B56-D8C47AB6DE53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42A72844-6DAC-4BEE-9B56-D8C47AB6DE53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42A72844-6DAC-4BEE-9B56-D8C47AB6DE53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42A72844-6DAC-4BEE-9B56-D8C47AB6DE53}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
