@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,11 +8,11 @@ using VideoAppUI.VideoAppDAL.Entities;
 
 namespace VideoAppDAL.Repositories
 {
-    class VideoRepositoryEFMemory : IVideoRepository
+    class VideoRepository : IVideoRepository
     {
         VideoAppContext _context;
 
-        public VideoRepositoryEFMemory(VideoAppContext context)
+        public VideoRepository(VideoAppContext context)
         {
             _context = context;
         }
@@ -41,7 +42,11 @@ namespace VideoAppDAL.Repositories
 
         public List<Video> GetAll()
         {
-            return _context.Videos.ToList();
+
+            return _context.Videos
+                .Include(v => v.Producers)
+                .ThenInclude(vp => vp.Producer)
+                .ToList();
         }
     }
 }

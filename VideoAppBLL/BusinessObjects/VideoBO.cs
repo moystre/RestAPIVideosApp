@@ -18,6 +18,6 @@ namespace VideoAppUI.VideoAppBLL.BusinessObjects
         public int Duration { get; set; }
 
         public List<ProducerBO> Producers { get; set; }
-        public object ProducerIds { get; internal set; }
+        //public object ProducerIds { get; internal set; }
     }
 }

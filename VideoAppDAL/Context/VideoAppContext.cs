@@ -19,6 +19,26 @@ namespace VideoAppDAL.Context
 
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //building a combined primarykey 
+            modelBuilder.Entity<VideoProducer>()
+                .HasKey(vp => new { vp.VideoId, vp.ProducerId });
+            base.OnModelCreating(modelBuilder);
+
+            //foreign key
+            modelBuilder.Entity<VideoProducer>()
+                .HasOne(vp => vp.Producer)
+                .WithMany(p => p.Videos)
+                .HasForeignKey(vp => vp.ProducerId);
+
+            //foreign key
+            modelBuilder.Entity<VideoProducer>()
+                .HasOne(vp => vp.Video)
+                .WithMany(v => v.Producers)
+                .HasForeignKey(vp => vp.VideoId);
+        }
+
         public DbSet<Video> Videos { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Producer> Producers { get; set; }

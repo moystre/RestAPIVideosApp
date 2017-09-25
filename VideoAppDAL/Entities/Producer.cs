@@ -11,6 +11,6 @@ namespace VideoAppDAL.Entities
         public string Name { get; set; }
         public string Location { get; set; }
 
-        List<Video> Videos { get; set; }
+        public List<VideoProducer> Videos { get; set; }
     }
 }
