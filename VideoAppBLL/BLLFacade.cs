@@ -30,6 +30,14 @@ namespace VideoAppBLL
                 return new GenreService(new DALFacade());
             }
         }
+
+        public IProducerService ProducerService
+        {
+            get
+            {
+                return new ProducerService(new DALFacade());
+            }
+        }
     }
 }
 

@@ -8,6 +8,7 @@ namespace VideoAppDAL
     {
         IVideoRepository VideoRepository { get; }
         IGenreRepository GenreRepository { get; }
+        IProducerRepository ProducerRepository { get; }
         int Complete();
     }
 }

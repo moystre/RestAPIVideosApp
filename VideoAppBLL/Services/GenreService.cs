@@ -72,6 +72,7 @@ namespace VideoAppBLL.Services
                 genreEntity.VideoId = genre.VideoId;
                 uow.Complete();
 
+                //BLL choice!
                 genreEntity.Video = uow.VideoRepository.Get(genreEntity.VideoId);
                 return conv.Convert(genreEntity);
             }

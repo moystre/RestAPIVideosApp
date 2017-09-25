@@ -12,7 +12,7 @@ namespace VideoAppBLL.Services
     class VideoService : IVideoService
     {
         DALFacade facade;
-        VideoConverter conv = new VideoConverter();
+        VideoConverter conv = new VideoConverter(); 
 
         public VideoService(DALFacade facade)
         {
@@ -86,6 +86,7 @@ namespace VideoAppBLL.Services
                 videoFromDB.Title = video.Title;
                 videoFromDB.Genre = video.Genre;
                 videoFromDB.Duration = video.Duration;
+                videoFromDB.Producers = video.Producers;
                 uow.Complete();
                 return conv.Convert(videoFromDB);
             }

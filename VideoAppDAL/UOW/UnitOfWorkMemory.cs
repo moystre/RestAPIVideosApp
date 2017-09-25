@@ -10,6 +10,7 @@ namespace VideoAppDAL.UOW
     {
         public IVideoRepository VideoRepository { get; internal set; }
         public IGenreRepository GenreRepository { get; internal set; }
+        public IProducerRepository ProducerRepository { get; internal set; }
 
         private VideoAppContext context;
 
@@ -18,8 +19,8 @@ namespace VideoAppDAL.UOW
             context = new VideoAppContext();
 
             VideoRepository = new VideoRepositoryEFMemory(context);
-
             GenreRepository = new GenreRepository(context);
+            ProducerRepository = new ProducerRepository(context);
         }
 
         public int Complete()

@@ -1,8 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using VideoAppDAL.Context;
 using VideoAppDAL.Entities;
 
@@ -40,6 +37,7 @@ namespace VideoAppDAL.Repositories
         public List<Genre> GetAll()
         {
             return _context.Genres.ToList();
+            //return _context.Genres.Include(g => g.Video).ToList();
         }
     }
 }
