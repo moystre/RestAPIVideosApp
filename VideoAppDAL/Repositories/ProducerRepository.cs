@@ -7,7 +7,7 @@ using VideoAppDAL.Entities;
 
 namespace VideoAppDAL.Repositories
 {
-    class ProducerRepository
+    class ProducerRepository : IProducerRepository
     {
         VideoAppContext _context;
 
@@ -39,10 +39,13 @@ namespace VideoAppDAL.Repositories
             return _context.Producers.ToList();
         }
 
+
         public IEnumerable<Producer> GetAllById(List<int> ids)
-        { 
+        {
             if (ids == null) { return null; }
-            return _context.Producers.Where(a => ids.Contains(a.Id));
+            return _context.Producers.Where(p => ids.Contains(p.Id));
+
+
         }
     }
-}
+}   

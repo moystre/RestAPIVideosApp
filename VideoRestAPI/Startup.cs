@@ -41,29 +41,42 @@ namespace VideoRestAPI
                     Location = "City00010"
                 });
 
+                var prod2 = facade.ProducerService.Create(new ProducerBO()
+                {
+                    Name = "Producer2",
+                    Location = "City00020"
+                });
+
+                var prod3 = facade.ProducerService.Create(new ProducerBO()
+                {
+                    Name = "Producer3",
+                    Location = "City00030"
+                });
+
                 var vid1 = facade.VideoService.Create(new VideoBO()
                 {
                     Title = "video1",
                     Duration = 234,
                     Genre = "genre1",
-                    Producers = new List<ProducerBO>() { prod1 }
+                    ProducerIds = new List<int>() { prod1.Id, prod2.Id }
                 });
 
                 var vid2 = facade.VideoService.Create(new VideoBO()
                 {
                     Title = "video2",
                     Duration = 24,
-                    Genre = "genre2"
+                    Genre = "genre2",
+                    ProducerIds = new List<int>() { prod1.Id, prod3.Id }
+
                 });
 
                 var vid3 = facade.VideoService.Create(new VideoBO()
                 {
                     Title = "video3",
                     Duration = 242,
-                    Genre = "genre3"
+                    Genre = "genre3",
+                    ProducerIds = new List<int>() { prod3.Id  }
                 });
-
-                
 
                 facade.GenreService.Create(new GenreBO()
                 {
@@ -75,16 +88,16 @@ namespace VideoRestAPI
                 facade.GenreService.Create(new GenreBO()
                 {
                     Name = "genre2",
-                    Video = vid2
+                    Video = vid2,
+                    VideoId = vid2.Id
                 });
 
                 facade.GenreService.Create(new GenreBO()
                 {
                     Name = "genre3",
-                    Video = vid3
+                    Video = vid3,
+                    VideoId = vid3.Id
                 });
-
-                
             }
 
             app.UseMvc();

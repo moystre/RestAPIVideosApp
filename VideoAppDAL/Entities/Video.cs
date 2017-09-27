@@ -13,6 +13,6 @@ namespace VideoAppUI.VideoAppDAL.Entities
         public int Duration { get; set; }
 
         public List<Genre> Genres { get; set; }
-        public List<VideoProducer> VideoProducer { get; set; }
+        public List<VideoProducer> Producers { get; set; }
     }
 }

@@ -12,7 +12,8 @@ namespace VideoAppBLL.Services
     class VideoService : IVideoService
     {
         DALFacade facade;
-        VideoConverter conv = new VideoConverter(); 
+        VideoConverter conv = new VideoConverter();
+        ProducerConverter pconv = new ProducerConverter();
 
         public VideoService(DALFacade facade)
         {
@@ -61,7 +62,27 @@ namespace VideoAppBLL.Services
         {
             using (var uow = facade.UnitOfWork)
             {
-                return conv.Convert(uow.VideoRepository.Get(Id));
+                //get and convert the video
+                var video = conv.Convert(uow.VideoRepository.Get(Id));
+
+                if(video.ProducerIds != null)
+                {
+                    //get all related Producers from ProducerRepository using producer 
+                    //convert and add the producers to the VideoBO
+
+                    /*
+                    video.Producers = video.ProducerIds?
+                        .Select(id => pconv
+                        .Convert(uow.ProducerRepository.Get(Id)))
+                        .ToList();
+                    */
+                    video.Producers = uow.ProducerRepository.GetAllById(video.ProducerIds)
+                        .Select(p => pconv.Convert(p))
+                        .ToList();
+                }
+
+                //return conv.Convert(uow.VideoRepository.Get(Id));
+                return video;
             }
         }
 
@@ -83,10 +104,29 @@ namespace VideoAppBLL.Services
                 {
                     throw new InvalidOperationException("Video not found");
                 }
+
+                var videoUpdated = conv.Convert(video);
+
                 videoFromDB.Title = video.Title;
                 videoFromDB.Genre = video.Genre;
                 videoFromDB.Duration = video.Duration;
-                videoFromDB.Producers = video.Producers;
+                //videoFromDB.Producers = video.Producers;
+
+                // 1. remove all, except the old ids we want to keep - avoid attached issues
+                videoFromDB.Producers.RemoveAll(
+                    vp => !videoUpdated.Producers.Exists(
+                    p => p.ProducerId == vp.ProducerId && p.VideoId == vp.VideoId
+                    ));
+                // 2. remove all Ids in db from videoUpdated
+                videoUpdated.Producers.RemoveAll(
+                    vp => videoFromDB.Producers.Exists(
+                    p => p.ProducerId == vp.ProducerId && p.VideoId == vp.VideoId
+                    ));
+
+                // 3. add all new VideoProducers not yet seen in db
+                videoFromDB.Producers.AddRange(
+                    videoUpdated.Producers);
+
                 uow.Complete();
                 return conv.Convert(videoFromDB);
             }

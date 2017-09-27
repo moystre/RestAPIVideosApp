@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using VideoAppDAL.Context;
+﻿using VideoAppDAL.Context;
 using VideoAppDAL.Repositories;
 
 namespace VideoAppDAL.UOW
@@ -18,7 +15,7 @@ namespace VideoAppDAL.UOW
         {
             context = new VideoAppContext();
 
-            VideoRepository = new VideoRepositoryEFMemory(context);
+            VideoRepository = new VideoRepository(context);
             GenreRepository = new GenreRepository(context);
             ProducerRepository = new ProducerRepository(context);
         }
