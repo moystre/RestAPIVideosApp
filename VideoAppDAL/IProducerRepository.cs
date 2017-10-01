@@ -8,7 +8,6 @@ namespace VideoAppDAL
     public interface IProducerRepository
 
     {
-
         //
         Producer Create(Producer address);
         //R

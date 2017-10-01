@@ -1,9 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using VideoAppDAL.Entities;
+﻿using VideoAppDAL.Entities;
 using VideoAppUI.VideoAppDAL.Entities;
+using Microsoft.EntityFrameworkCore;
+
+//using Microsoft.Data.Entity;
 
 namespace VideoAppDAL.Context
 {
@@ -14,9 +13,19 @@ namespace VideoAppDAL.Context
             .Options;
 
         //what we want in the memoryDb
-        public VideoAppContext() : base(options)
+        /*public VideoAppContext() : base(options)
         {
 
+        }*/
+
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder
+                    .UseSqlServer(@"Server=tcp:videoapp-moystre.database.windows.net,1433;Initial Catalog=VideoAppDB;Persist Security Info=False;User ID=moystre;Password=zaq1@WSXCDE#;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -42,6 +51,5 @@ namespace VideoAppDAL.Context
         public DbSet<Video> Videos { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Producer> Producers { get; set; }
-
     }
 }

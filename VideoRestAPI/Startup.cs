@@ -33,6 +33,8 @@ namespace VideoRestAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                /*
                 var facade = new BLLFacade();
 
                 var prod1 = facade.ProducerService.Create(new ProducerBO()
@@ -98,6 +100,7 @@ namespace VideoRestAPI
                     Video = vid3,
                     VideoId = vid3.Id
                 });
+                */
             }
 
             app.UseMvc();
